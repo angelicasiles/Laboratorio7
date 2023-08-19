@@ -12,7 +12,7 @@ class UsuariosController {
       if (listaUsuario.length == 0) {
         return resp
           .status(404)
-          .json({ mensaje: "La base de datos se encuentra vacia" });
+          .json({ mensaje: "La base de datos en estos momentos se encuentra vacia" });
       }
 
       return resp.status(200).json(listaUsuario);
@@ -29,7 +29,7 @@ class UsuariosController {
       const { cedula, nombre, apellido1, apellido2, correo, rol, contrasena } =
         req.body;
 
-      // typescript
+  
       const fecha = new Date();
 
       let usuario = new Usuarios();
@@ -48,15 +48,15 @@ class UsuariosController {
         where: { cedula: cedula, estado: true },
       });
       if (usuarioExist) {
-       return resp.status(400).json({ mensaje: "El usuario existe dentro de la base de datos" });
+       return resp.status(400).json({ mensaje: "El usuario existe en la base de datos, vuelva a intentarlo " });
       }
 
-      // validando que el correo no este registrado a algun usuario ya creado
+    
       usuarioExist = await repoUsuario.findOne({ where: { correo: correo } });
       if (usuarioExist) {
         return resp
           .status(400)
-          .json({ mensaje: "Ya existe un usuario con ese correo" });
+          .json({ mensaje: "Correo electrónico en uso " });
       }
       try {
         await repoUsuario.save(usuario);
@@ -74,13 +74,13 @@ class UsuariosController {
     const { cedula, nombre, apellido1, apellido2, correo, rol, contrasena, fecha_ingreso } =
         req.body;
 
-    //validacion de reglas de negocio
+  
     const UsuariosRepo = AppDataSource.getRepository(Usuarios);
     let usua: Usuarios;
     try {
       usua = await UsuariosRepo.findOneOrFail({ where: { cedula } });
     } catch (error) {
-      return resp.status(404).json({ mensaje: "No existe ese usuario." });
+      return resp.status(404).json({ mensaje: "No existe ese usuario en la base de datos " });
     }
 
     usua.nombre = nombre;
@@ -119,13 +119,13 @@ class UsuariosController {
       } catch (error) {
         return resp
           .status(404)
-          .json({ mensaje: "No se encuentra el usuario con esa cedula" });
+          .json({ mensaje: "No se encuentra el usuario con esa cedula, inténtalo de nuevo " });
       }
 
       usua.estado = false;
       try {
         await UsuariosRepo.save(usua);
-        return resp.status(200).json({ mensaje: "Se eliminó correctamente" });
+        return resp.status(200).json({ mensaje: "Se eliminó correctamente el usuario " });
       } catch (error) {
         return resp.status(400).json({ mensaje: "No se pudo eliminar." });
       }
