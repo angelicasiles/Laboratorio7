@@ -5,41 +5,41 @@ import * as bcrypt from "bcryptjs";
 @Entity()
 export class Usuarios {
   @PrimaryColumn()
-  @IsNotEmpty({ message: "Falta la cedula" })
+  @IsNotEmpty({ message: "DEBES DE INDICAR EL LA CÉDULA DEL USUARIO " })
   cedula: string;
 
   @Column({ length: 50 })
   @MaxLength(50)
-  @IsNotEmpty({ message: "Falta el nombre" })
+  @IsNotEmpty({ message: "DEBES INDICAR EL NOMBRE DEL USUARIO " })
   nombre: string;
 
   @Column()
   @MaxLength(50)
-  @IsNotEmpty({ message: "Falta el apellido 1" })
+  @IsNotEmpty({ message: "DEBES INDICAR EL PRIMER APELLIDO " })
   apellido1: string;
 
   @Column()
   @MaxLength(50)
-  @IsNotEmpty({ message: "Falta el apellido 2" })
+  @IsNotEmpty({ message: "DEBES DE INDICAR EL SEGUNDO APELLIDO " })
   apellido2: string;
 
   @Column()
+  @IsNotEmpty({ message: "DEBES DE INDICAR LA FECHA " })
   fecha_ingreso: Date;
 
   @Column({ unique: true })
-  @IsEmail()
-  @IsNotEmpty({ message: "Falta el correo" })
+  @IsNotEmpty({ message: "DEBES DE INDICAR EL CORREO ELECTRÓNICO " })
   @MaxLength(50)
   correo: string;
 
   @Column()
-  @IsNotEmpty({ message: "Falta el rol" })
+  @IsNotEmpty({ message: "DEBES DE INDICAR EL ROL" })
   rol: string;
 
   @Column()
-  @MaxLength(30)
+  @MaxLength(18)
   @MinLength(5)
-  @IsNotEmpty({ message: "Falta la contraseña" })
+  @IsNotEmpty({ message: "DEBES DE INDICAR LA CONTRASEÑA " })
   contrasena: string;
 
   @Column({ default: true })
