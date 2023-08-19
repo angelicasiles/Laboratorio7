@@ -20,14 +20,13 @@ export class AdminUsuariosComponent {
     @Inject(MAT_DIALOG_DATA) public data: {usuario: any}){}
 
   ngOnInit(){
-    // Si tiene datos, cambia el titulo
+    
     if(this.data?.usuario){
-      // Si es modificar pongo el create false
       this.isCreate = false;
       this.titulo = "MODIFICACIÓN DE USUARIO";
       this.cargarDatosForm();
     }else{
-      // Si es crear pongo el create false
+      
       this.isCreate = true;
       this.titulo = "CREACIÓN DE USUARIO";
     }
