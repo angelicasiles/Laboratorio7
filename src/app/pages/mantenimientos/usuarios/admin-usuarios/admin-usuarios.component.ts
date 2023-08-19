@@ -33,9 +33,6 @@ export class AdminUsuariosComponent {
     }
   }
   cargarDatosForm(){
-
-    //El patchValue me a pintar en el formulario los datos que actualmente tengo en la base de datos,
-    //pero puedo modificarlo.
     this.usuarioForm.baseForm.patchValue({
       cedula: this.data.usuario.cedula,
       nombre: this.data.usuario.nombre,
@@ -49,20 +46,19 @@ export class AdminUsuariosComponent {
     });
   }
 
-  guardar(){
-    //El valid, me va a devolver un true o un false
+  guardar(){ 
     if(this.usuarioForm.baseForm.valid){
 
       if(this.isCreate){
         this.srvUsuarios.guardar(this.usuarioForm.baseForm.value).subscribe((dato) =>{
-          alert("GUARDADO CORRECTAMENTE");
+          alert("GUARDADO CORRECTAMENTE EL USUARIO ");
           window.location.reload(); 
         },(error) =>{
           alert(error.error.mensaje);
         });
       }else{
         this.srvUsuarios.modificar(this.usuarioForm.baseForm.value).subscribe((dato) =>{
-          alert("MODIFICADO CORRECTAMENTE");
+          alert("MODIFICADO CORRECTAMENTE EL USUARIO ");
           window.location.reload(); 
         },(error) =>{
           alert(error.error.mensaje);
