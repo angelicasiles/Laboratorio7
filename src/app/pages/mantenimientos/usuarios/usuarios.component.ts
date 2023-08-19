@@ -16,7 +16,7 @@ export class UsuariosComponent {
   displayedColumns: string[] = ['cedula', 'nombre', 'apellido1',
   'apellido2','rol','correo','contrasena','acciones'];
   dataSource = new MatTableDataSource();
-  //Para poder de jalar los datos, lo hacemos por inyeccion de dependencia.
+
   constructor(private srvUsuarios: UsuariosService, public dialog: MatDialog,
     private datePipe: DatePipe){
 
@@ -38,7 +38,7 @@ export class UsuariosComponent {
       alert("SE ELIMINO EL USUARIO CORRECTAMENTE")
       window.location.reload(); 
     },(error)=>{
-      alert("ERROR AL ELIMINAR USUARIO")
+      alert("ERROR AL ELIMINAR USUARIO, VUELVA A INTENTARLO ")
     })
   }
 
@@ -57,8 +57,7 @@ export class UsuariosComponent {
   `;
   alert(mensaje);
   }
-
-  // ? eso es para decir que va a recibir un producto opcional(que llegue o que no llegue)
+ 
   abrirDialog(usuario?:Usuarios):void{
     if(usuario){
       this.dialog.open(AdminUsuariosComponent, {width:'700px', height:'700px', data:{usuario}});
